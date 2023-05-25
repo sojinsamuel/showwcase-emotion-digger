@@ -35,7 +35,6 @@ async function getThreads() {
     return feed;
   } catch (error) {
     console.error("Error:", error.message);
-    // Handle the error gracefully
     return null;
   }
 }
@@ -43,7 +42,6 @@ async function getThreads() {
 async function processThread(thread) {
   const { id, title, message, user } = thread;
 
-  // Count the number of words in the message
   const wordCount = message.split(" ").length;
 
   if (wordCount > 7) {
@@ -73,7 +71,7 @@ async function processThread(thread) {
     // Check if the record already exists in Airtable
     base(tableName)
       .select({
-        filterByFormula: `{ThreadId} = '${id}'`, // Replace 'Thread ID' with the actual field name in your Airtable
+        filterByFormula: `{ThreadId} = '${id}'`,
         maxRecords: 1,
       })
       .firstPage((err, records) => {
@@ -92,7 +90,7 @@ async function processThread(thread) {
               Notes: `${title} ${message}`,
               ImageLink: user.profilePictureUrl,
               Status: status,
-              ThreadId: `${id}`, // Replace 'Thread ID' with the actual field name in your Airtable
+              ThreadId: `${id}`,
             },
             (err, record) => {
               if (err) {
@@ -112,7 +110,6 @@ async function processThread(thread) {
   }
 }
 
-// Usage example
 getThreads()
   .then((feed) => {
     if (feed && feed.length > 0) {
@@ -124,7 +121,7 @@ getThreads()
         } else {
           clearInterval(interval);
         }
-      }, 1 * 60 * 1000); // Wait for 12 minutes between each iteration
+      }, 1 * 60 * 1000); // Wait for 1 minute between each iteration
     } else {
       console.log("No threads found in the Discover Feed.");
     }
