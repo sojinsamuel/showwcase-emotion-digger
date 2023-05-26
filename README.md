@@ -57,3 +57,8 @@ node bot.js
 ```
 
 The bot will start fetching threads from Showwcase and performing emotion analysis on the messages. The relevant information will be stored in Airtable.
+
+## Reference
+- [Showwcase API Docs](https://docs.showwcase.com/)
+- [Airtable API Docs](https://airtable.com/developers/web/api/introduction)
+- [OpenAI API Docs](https://platform.openai.com/docs/introduction)
